@@ -24,9 +24,14 @@
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi facere aperiam sint sed magni molestiae accusamus consectetur velit, suscipit provident!</p>
         </section>
     </div>
-    <video controls>
-        <source src="{{ url_for('static', filename='video/result') }}">
-    </video>
+ <div class="container">
+        <div class="row">
+            <div class="col-lg-8  offset-lg-2">
+                <h3 class="mt-5">Live Streaming</h3>
+                <img src="{{ url_for('video_feed') }}" width="50%">
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
