@@ -19,18 +19,71 @@
                 <h1>Emotional Cognizant</h1>
             </div>
         </div>
-        <section class="row" id="about">
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">Abous us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#problem">Problem</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#solution">Our solution</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container text-secondary w-75">
+        <section class="row p-3" id="about">
             <h1>About us</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi facere aperiam sint sed magni molestiae accusamus consectetur velit, suscipit provident!</p>
+            <p>We are a team working on a product using Face and emotion recognition built with help of tools and
+                technologies like Computer Vision, ML, Haarcaascade and Keras, HTML, CSS, Javascript, Python, flask to
+                promote mental well being overall. It helps in studying the mood patterns of people with images or
+                videos captured from CCTV.</p>
+        </section>
+        <section class="row p-3" id="problem">
+            <h1>Problem statement</h1>
+            <p>We often find that children have difficulty in expressing their feelings. And most often when they are
+                sad or scared of something. Or even in teenagers, they find it difficult to express themselves. These
+                small problems sometimes turn into something really bad.</p>
+        </section>
+        <section class="row p-3" id="solution">
+            <h1>Our Solution</h1>
+            <p>Facial expression system to recognise the expression of child and get the feelings of the child. This
+                will help in places where many children are kept. We can get regular interval data for many children and
+                analyse their growth.</p>
         </section>
     </div>
- <div class="container">
+    <div class="container">
         <div class="row">
             <div class="col-lg-8  offset-lg-2">
                 <h3 class="mt-5">Live Streaming</h3>
                 <img src="{{ url_for('video_feed') }}" width="50%">
             </div>
         </div>
+    </div>
+    <div class="container text-secondary w-75">
+        <section class="row p-3" id="team members">
+            <h1>Team Members</h1>
+            <ul>
+                <li>Abhigyan - 2nd year B.tech CSE GGU</li>
+                <li>Adarsh Saurav - 2nd year B.tech CSE GGU</li>
+                <li>Riya Sahu - 2nd year B.tech CSE SRGI</li>
+                <li>Rishikesh Kumar - 2nd year B.tech CSE GGU</li>
+            </ul>
+        </section>
     </div>
 </body>
 
