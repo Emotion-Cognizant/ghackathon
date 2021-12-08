@@ -1,5 +1,3 @@
-
-
 from flask import Flask, render_template, Response
 import cv2
 import os
@@ -11,17 +9,40 @@ from keras.preprocessing.image import load_img, img_to_array
 from keras.models import  load_model
 import matplotlib.pyplot as plt
 import numpy as np
+from flask_sqlalchemy import SQLAlchemy
 
 
 app=Flask(__name__)
+
+db_name = 'data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_name
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+db = SQLAlchemy(app)
+
+# MAKING MODEL FOR THE DATABASE
+class Emotion(db.Model):  
+    __tablename__ = 'emotion'
+    id = db.Column(db.Integer, primary_key=True)
+    happy = db.Column(db.Integer)
+    sad = db.Column(db.Integer)
+    unknown = db.Column(db.Integer)
+
+
+# SETTING UP THE EMOTION DETECTION 
+EMOTIONS = {
+    "Happy" : 0,
+    "Sad" : 0,
+    "xxxxx" : 0
+}
 cap = cv2.VideoCapture(0)
 model = load_model("best_model.h5")
 
 face_haar_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
+def gen_frames(running):
+    if not running :
+        return
 
-
-def gen_frames():  
     while True:
         ret, test_img = cap.read()   # read the cap test_img
         if not ret:
@@ -44,8 +65,9 @@ def gen_frames():
                 # find max indexed array
                 max_index = np.argmax(predictions[0])
 
-                emotions = ('Happy', 'xxxxx', 'SAD', 'Happy', 'sad', 'happy', 'xxxxx')
+                emotions = ('Happy', 'xxxxx', 'Sad', 'Happy', 'Sad', 'Happy', 'xxxxx')
                 predicted_emotion = emotions[max_index]
+                EMOTIONS[predicted_emotion] += 1
 
                 cv2.putText(test_img, predicted_emotion, (int(x), int(y)), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
 
@@ -55,11 +77,22 @@ def gen_frames():
             yield (b'--test_img\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + test_img + b'\r\n')
 
+## SETTING UP THE ROUTES
 @app.route('/')
 def index():
     return render_template('index.html')
+
 @app.route('/video_feed')
 def video_feed():
-    return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=test_img')
+    running = True
+    return Response(gen_frames(running), mimetype='multipart/x-mixed-replace; boundary=test_img')
+
+@app.route("/showdata")
+def showData():
+
+    data = Emotion.query.all()
+    return render_template('showdata.html',data=data)
+
+# RUNNING OUR APP
 if __name__=='__main__':
     app.run(debug=True)
