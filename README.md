@@ -8,13 +8,13 @@ We often find that children have difficulty in expressing their feelings. And mo
 Facial expression system to recognise the expression of child and get the feelings of the child. This will help in places where many children are kept. We can get regular interval data for many children and analyse their growth.
 
 ## Technologies used
-Computer Vision
-Front-end - HTML, CSS, JS
-Backend - Flask
-Database - SQLAlchemy
+* Computer Vision
+* Front-end - HTML, CSS, JS
+* Backend - Flask
+* Database - SQLAlchemy
 
 ## Team
-Abhigyan
-Adarsh Saurav
-Riya Sahu
-Rishikesh Kumar
+* Abhigyan
+* Adarsh Saurav
+* Riya Sahu
+* Rishikesh Kumar
