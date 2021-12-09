@@ -1,10 +1,21 @@
 {% include 'base.html' %}
 {% block body %}
 <div class="container-fluid">
-    <div class="row">
+    <div class="row bg-dark text-white p-5">
         <div class="col-12">
-            <div id="myPlot" data-sad={{data[0].sad}} data-happy={{data[0].happy}} data-unknown={{data[0].unknown}}>
+            <a href="/" class="btn text-white">Home</a>
+        </div>
+    </div>
+    <div class="row p-3 bg-dark">
+        <div class="col-12">
+            <h4>Emotion Bar Graph</h4>
+            <div id="myPlot" data-sad={{data[0].sad}} data-happy={{data[0].happy}} data-unknown={{data[0].unknown}}
+            class="bg-dark">
             </div>
+        </div>
+        <div class="col-12">
+            <h4>Emotion Pie Chart</h4>
+            <div id="myPie" class="bg-dark"></div>
         </div>
     </div>
 </div>
@@ -23,9 +34,15 @@
         y: yArray,
         type: "bar"
     }];
+    var data2 = [{
+        labels: xArray,
+        values: yArray,
+        type: "pie"
+    }];
 
     var layout = { title: "Emotion graph" };
 
     Plotly.newPlot("myPlot", data, layout);
+    Plotly.newPlot("myPie", data2, layout);
 </script>
 {% endblock script %}
