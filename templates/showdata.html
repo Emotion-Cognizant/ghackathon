@@ -1,4 +1,31 @@
 {% include 'base.html' %}
 {% block body %}
-    
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div id="myPlot" data-sad={{data[0].sad}} data-happy={{data[0].happy}} data-unknown={{data[0].unknown}}>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock body %}
+
+{% block script %}
+<script>
+    const p = document.getElementById("myPlot");
+
+    var xArray = ["Happy", "Sad", "Unknown"];
+    var yArray = [p.dataset.sad, p.dataset.happy, p.dataset.unknown];
+
+    var data = [{
+        x: xArray,
+        y: yArray,
+        type: "bar"
+    }];
+
+    var layout = { title: "Emotion graph" };
+
+    Plotly.newPlot("myPlot", data, layout);
+</script>
+{% endblock script %}

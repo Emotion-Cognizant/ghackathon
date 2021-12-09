@@ -4,6 +4,8 @@ import os
 import numpy as np
 from keras.preprocessing import image
 import warnings
+
+from werkzeug.utils import redirect
 warnings.filterwarnings("ignore")
 from keras.preprocessing.image import load_img, img_to_array 
 from keras.models import  load_model
@@ -93,6 +95,21 @@ def showData():
     data = Emotion.query.all()
     return render_template('showdata.html',data=data)
 
+# saving data into the database by clicking on the saveData button
+@app.route("/savedata")
+def saveData():
+
+    toadd = Emotion.query.filter_by(id=1).first()
+    toadd.sad += EMOTIONS["Sad"]
+    toadd.happy += EMOTIONS["Happy"]
+    toadd.unknown += EMOTIONS["xxxxx"]
+    db.session.commit()
+
+
+    return redirect("/showdata")
+
 # RUNNING OUR APP
 if __name__=='__main__':
+
+    db.create_all()
     app.run(debug=True)
